@@ -1,6 +1,13 @@
 import { prismaClient } from "../../lib/db";
 
-const queries = {};
+const queries = {
+  getUserById: async (_: any, { id }: { id: string }) => {
+    const user = await prismaClient.user.findFirstOrThrow({
+      where: { id: id },
+    });
+    return user;
+  },
+};
 
 const mutations = {
   createUser: async (
